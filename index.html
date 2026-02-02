@@ -59,6 +59,43 @@
     @keyframes slideDown {
       from { transform: translateY(-50px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
+      .lights {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px 0;
+}
+
+.lights span {
+  width: 20px;
+  height: 20px;
+  background: #400;
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+.lights span.active {
+  background: red;
+  opacity: 1;
+
+  .confetti {
+  position: fixed;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  background: gold;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+}
+
     }
   </style>
 </head>
@@ -66,17 +103,62 @@
 <body>
 
   <div class="container">
-    <h1>🏁 Valentine Grand Prix 🏁</h1>
-    <p id="text">Lights out and away we go…</p>
-    <button onclick="nextLap()">START RACE</button>
+  <h1>🏁 Valentine Grand Prix 🏁</h1>
+
+  <div class="lights">
+    <span></span><span></span><span></span><span></span><span></span>
   </div>
 
-  <script>
-    function nextLap() {
-      document.getElementById("text").innerHTML =
-        "🏎️ Final Lap…<br><br><strong>Baby Aduś,<br>will you be my Valentine? ❤️</strong>";
-    }
-  </script>
+  <p id="text">Prepare for the start…</p>
+  <button onclick="startLights()">START RACE</button>
+</div>
+
+
+ <script>
+  const lights = document.querySelectorAll(".lights span");
+  let current = 0;
+
+  function startLights() {
+    document.getElementById("text").innerText = "🔴🔴🔴🔴🔴";
+
+    const interval = setInterval(() => {
+      if (current < lights.length) {
+        lights[current].classList.add("active");
+        current++;
+      } else {
+        clearInterval(interval);
+        showQuestion();
+      }
+    }, 600);
+  }
+
+  function showQuestion() {
+  document.getElementById("text").innerHTML = `
+    🏁 GO!<br><br>
+    <strong>Baby Aduś,<br>will you be my Valentine? ❤️</strong><br><br>
+    <button onclick="celebrate()">YES 🏆</button>
+    <button onclick="celebrate()">ALWAYS YES 🏁</button>
+  `;
+
+    function celebrate() {
+  document.getElementById("text").innerHTML =
+    "🏆 P1 IN MY HEART 🏆<br><br>I love you ❤️";
+
+  for (let i = 0; i < 50; i++) {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.background = ["gold", "red", "white"][Math.floor(Math.random() * 3)];
+    document.body.appendChild(confetti);
+
+    setTimeout(() => confetti.remove(), 3000);
+  }
+}
+
+}
+
+</script>
+
 
 </body>
 </html>

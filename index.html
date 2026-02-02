@@ -74,8 +74,9 @@
     .confetti {
       position: fixed;
       top: -10px;
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
       animation: fall 3s linear forwards;
     }
 
@@ -143,6 +144,7 @@
       document.getElementById("text").innerHTML =
         "🏆 P1 IN MY HEART 🏆<br><br>I love you ❤️";
 
+      // Generate confetti
       for (let i = 0; i < 60; i++) {
         const confetti = document.createElement("div");
         confetti.classList.add("confetti");

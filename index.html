@@ -89,7 +89,12 @@
       margin: 10px;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-
+.start {
+  background: #2aff7b;
+  color: #002b18;
+  font-weight: bold;
+  box-shadow: 0 0 18px rgba(42, 255, 123, 0.7);
+}
     .yes {
       background: linear-gradient(135deg, #ff8700, #dc0000);
     }
@@ -134,8 +139,8 @@
 
     <p id="text">All systems ready. Waiting for your decision…</p>
 
-    <button onclick="startRace()">START</button>
-  </div>
+ <button class="start" onclick="startRace()">START</button>
+
 
   <script>
     const lights = document.querySelectorAll(".lights span");

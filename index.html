@@ -26,31 +26,30 @@
 
     h1 {
       font-size: 3rem;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       animation: slideDown 1.5s ease;
     }
 
     .teams {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      margin-bottom: 25px;
+      gap: 25px;
+      margin-bottom: 30px;
     }
 
     .team {
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-weight: bold;
-      font-size: 0.9rem;
+      width: 90px;
+      height: 12px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
     }
 
     .mclaren {
-      background: #ff8700; /* Papaya */
-      color: black;
+      background: #ff8700;
     }
 
     .ferrari {
-      background: #dc0000; /* Ferrari red */
+      background: #dc0000;
     }
 
     .lights {
@@ -122,8 +121,8 @@
     <h1>🏁 Valentine Grand Prix 🏁</h1>
 
     <div class="teams">
-      <div class="team mclaren">McLaren</div>
-      <div class="team ferrari">Ferrari</div>
+      <div class="team mclaren"></div>
+      <div class="team ferrari"></div>
     </div>
 
     <div class="lights">
@@ -133,7 +132,7 @@
       <span class="green"></span>
     </div>
 
-    <p id="text">All teams ready. Awaiting your decision…</p>
+    <p id="text">All systems ready. Waiting for your decision…</p>
 
     <button onclick="startRace()">START</button>
   </div>
@@ -156,7 +155,7 @@
 
     function showQuestion() {
       document.getElementById("text").innerHTML = `
-        <strong>Baby Aduś,<br>will you be my Valentine? ❤️</strong><br><br>
+        <strong>Baby Aduś,<br>Will you be my Valentine? ❤️</strong><br><br>
         <button class="yes" onclick="yes()">YES 🏆</button>
         <button class="always" onclick="alwaysYes()">ALWAYS YES 🏁</button>
       `;
@@ -165,16 +164,16 @@
     function yes() {
       document.getElementById("text").innerHTML = `
         ❤️ I love you ❤️<br><br>
-        You’re the race winner in my heart.<br>
-        No matter the team, no matter the track — it’s always you.
+        You’re the race winner in my heart, my love so sweet.<br>
+        No matter the season, it’s always you.
       `;
     }
 
     function alwaysYes() {
       document.getElementById("text").innerHTML = `
         🏆 I love you 🏆<br><br>
-        You’re always my only champion.<br>
-        Today, tomorrow, and every season after.
+        You’re always my only champion, my sweetest baby pie <br>
+        Today, tomorrow, and every lap after.
       `;
     }
   </script>

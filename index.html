@@ -20,6 +20,7 @@
 
     .container {
       animation: fadeIn 2s ease;
+      width: 100%;
     }
 
     h1 {
@@ -70,6 +71,21 @@
       opacity: 1;
     }
 
+    /* SLIDING F1 CAR */
+    .car {
+      font-size: 50px;
+      position: absolute;
+      bottom: 40px;
+      left: -100px;
+      animation: drive 3s ease-out forwards;
+      display: none;
+    }
+
+    @keyframes drive {
+      from { left: -100px; }
+      to { left: 110%; }
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -83,6 +99,8 @@
 </head>
 
 <body>
+
+  <div class="car" id="car">🏎️</div>
 
   <div class="container">
     <h1>🏁 Valentine Grand Prix 🏁</h1>
@@ -118,19 +136,33 @@
       document.getElementById("text").innerHTML = `
         🏁 GO!<br><br>
         <strong>Baby Aduś,<br>will you be my Valentine? ❤️</strong><br><br>
-        <button onclick="showYesMessage()">YES 🏆</button>
-        <button onclick="showAlwaysYesMessage()">ALWAYS YES 🏁</button>
+        <button onclick="yes()">YES 🏆</button>
+        <button onclick="alwaysYes()">ALWAYS YES 🏁</button>
       `;
     }
 
-    function showYesMessage() {
-      document.getElementById("text").innerHTML =
-        "I love you, you're the race winner in my heart ❤️";
+    function yes() {
+      showCar();
+      document.getElementById("text").innerHTML = `
+        ❤️ I love you ❤️<br><br>
+        You’re the race winner in my heart.<br>
+        Every lap, every finish line — it’s always you.
+      `;
     }
 
-    function showAlwaysYesMessage() {
-      document.getElementById("text").innerHTML =
-        "I love you, you're always my only champion 🏆❤️";
+    function alwaysYes() {
+      showCar();
+      document.getElementById("text").innerHTML = `
+        🏆 I love you 🏆<br><br>
+        You’re always my only champion.<br>
+        No matter the track, no matter the distance.
+      `;
+    }
+
+    function showCar() {
+      const car = document.getElementById("car");
+      car.style.display = "block";
+      car.style.animation = "drive 3s ease-out forwards";
     }
   </script>
 

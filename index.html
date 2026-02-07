@@ -8,7 +8,7 @@
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+      background: radial-gradient(circle at top, #2a004f, #001a12);
       color: white;
       font-family: Arial, sans-serif;
       display: flex;
@@ -20,70 +20,88 @@
 
     .container {
       animation: fadeIn 2s ease;
-      width: 100%;
+      max-width: 700px;
+      padding: 20px;
     }
 
     h1 {
       font-size: 3rem;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       animation: slideDown 1.5s ease;
+    }
+
+    .teams {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .team {
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .mclaren {
+      background: #ff8700; /* Papaya */
+      color: black;
+    }
+
+    .ferrari {
+      background: #dc0000; /* Ferrari red */
+    }
+
+    .lights {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 30px 0;
+    }
+
+    .lights span {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      opacity: 0.4;
+    }
+
+    .purple { background: #b14cff; }
+    .green { background: #2aff7b; }
+
+    .lights span.active {
+      opacity: 1;
+      box-shadow: 0 0 12px currentColor;
     }
 
     p {
       font-size: 1.3rem;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     button {
-      background: #e10600;
       border: none;
-      padding: 15px 30px;
+      padding: 15px 32px;
       font-size: 18px;
       color: white;
       border-radius: 30px;
       cursor: pointer;
       margin: 10px;
-      transition: transform 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .yes {
+      background: linear-gradient(135deg, #ff8700, #dc0000);
+    }
+
+    .always {
+      background: linear-gradient(135deg, #b14cff, #2aff7b);
     }
 
     button:hover {
-      transform: scale(1.1);
-    }
-
-    /* F1 START LIGHTS */
-    .lights {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 30px 0;
-    }
-
-    .lights span {
-      width: 20px;
-      height: 20px;
-      background: #400;
-      border-radius: 50%;
-      opacity: 0.3;
-    }
-
-    .lights span.active {
-      background: red;
-      opacity: 1;
-    }
-
-    /* SLIDING F1 CAR */
-    .car {
-      font-size: 50px;
-      position: absolute;
-      bottom: 40px;
-      left: -100px;
-      animation: drive 3s ease-out forwards;
-      display: none;
-    }
-
-    @keyframes drive {
-      from { left: -100px; }
-      to { left: 110%; }
+      transform: scale(1.08);
+      box-shadow: 0 0 15px rgba(255,255,255,0.4);
     }
 
     @keyframes fadeIn {
@@ -92,7 +110,7 @@
     }
 
     @keyframes slideDown {
-      from { transform: translateY(-50px); opacity: 0; }
+      from { transform: translateY(-40px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
   </style>
@@ -100,69 +118,64 @@
 
 <body>
 
-  <div class="car" id="car">🏎️</div>
-
   <div class="container">
     <h1>🏁 Valentine Grand Prix 🏁</h1>
 
-    <div class="lights">
-      <span></span><span></span><span></span><span></span><span></span>
+    <div class="teams">
+      <div class="team mclaren">McLaren</div>
+      <div class="team ferrari">Ferrari</div>
     </div>
 
-    <p id="text">Prepare for the start…</p>
+    <div class="lights">
+      <span class="purple"></span>
+      <span class="green"></span>
+      <span class="purple"></span>
+      <span class="green"></span>
+    </div>
 
-    <button onclick="startLights()">START RACE</button>
+    <p id="text">All teams ready. Awaiting your decision…</p>
+
+    <button onclick="startRace()">START</button>
   </div>
 
   <script>
     const lights = document.querySelectorAll(".lights span");
-    let currentLight = 0;
+    let current = 0;
 
-    function startLights() {
-      document.getElementById("text").innerText = "🔴🔴🔴🔴🔴";
-
+    function startRace() {
       const interval = setInterval(() => {
-        if (currentLight < lights.length) {
-          lights[currentLight].classList.add("active");
-          currentLight++;
+        if (current < lights.length) {
+          lights[current].classList.add("active");
+          current++;
         } else {
           clearInterval(interval);
           showQuestion();
         }
-      }, 600);
+      }, 500);
     }
 
     function showQuestion() {
       document.getElementById("text").innerHTML = `
-        🏁 GO!<br><br>
         <strong>Baby Aduś,<br>will you be my Valentine? ❤️</strong><br><br>
-        <button onclick="yes()">YES 🏆</button>
-        <button onclick="alwaysYes()">ALWAYS YES 🏁</button>
+        <button class="yes" onclick="yes()">YES 🏆</button>
+        <button class="always" onclick="alwaysYes()">ALWAYS YES 🏁</button>
       `;
     }
 
     function yes() {
-      showCar();
       document.getElementById("text").innerHTML = `
         ❤️ I love you ❤️<br><br>
         You’re the race winner in my heart.<br>
-        Every lap, every finish line — it’s always you.
+        No matter the team, no matter the track — it’s always you.
       `;
     }
 
     function alwaysYes() {
-      showCar();
       document.getElementById("text").innerHTML = `
         🏆 I love you 🏆<br><br>
         You’re always my only champion.<br>
-        No matter the track, no matter the distance.
+        Today, tomorrow, and every season after.
       `;
-    }
-
-    function showCar() {
-      const car = document.getElementById("car");
-      car.style.display = "block";
-      car.style.animation = "drive 3s ease-out forwards";
     }
   </script>
 
